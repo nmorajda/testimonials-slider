@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <title>Frontend Mentor | Coding Bootcamp Testimonials Slider</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="testimonial">
+      <div class="testimonial__text">
+        <p class="testimonial__review">“ I’ve been interested in coding for a while but never taken the jump, until now.
+          I couldn’t recommend this course enough. I’m now in the job of my dreams and so excited about the future. ”
+        </p>
+        <h3 class="testimonial__author"><span class="testimonial__author-name">Tanya Sinclair</span> <span
+            class="testimonial__author-role">UX Engineer</span></h3>
+      </div>
+      <div class="testimonial__illustration">
+        <img src="./images/image-tanya.jpg" class="testimonial__image" alt="Photo of Tanya Sinclair">
+        <div class="testimonial__buttons">
+          <button class="btn" id="btn__prev" title="Previous">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="18">
+              <path fill="none" stroke="#8585AC" stroke-width="3" d="M11 1L3 9l8 8" />
+            </svg>
+          </button>
+          <button class="btn" id="btn__next" title="Next">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="18">
+              <path fill="none" stroke="#8585AC" stroke-width="3" d="M2 1l8 8-8 8" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="https://github.com/nmorajda">Norbert Morajda</a>.
+    </div>
+  </footer>
+
+  <script>
+    // fake data
+    const testimonials = [
+      {
+        review: `“ I’ve been interested in coding for a while but never taken the jump, until now. I couldn’t recommend this course enough. I’m now in the job of my dreams and so excited about the future. ”`,
+        name: 'Tanya Sinclair',
+        role: '2UX Engineer',
+        img: 'image-tanya.jpg'
+      },
+      {
+        review: `“ If you want to lay the best foundation possible I’d recommend taking this course. The depth the instructors go into is incredible. I now feel so confident about starting up as a professional developer. ”`,
+        name: 'John Tarkpor',
+        role: 'Junior Front-end Developer',
+        img: 'image-john.jpg'
+      },
+    ];
+    window.addEventListener('DOMContentLoaded', () => {
+      // IIFE
+      const testimonialSlider = function () {
+        // buttons
+        const testimonialBtnPrev = document.querySelector('#btn__prev');
+        const testimonialBtnNext = document.querySelector('#btn__next');
+        // DOM Elements
+        const testimonialReviewElem = document.querySelector('.testimonial__review');
+        const testimonialAuthorNameElem = document.querySelector('.testimonial__author-name');
+        const testimonialAuthorRoleElem = document.querySelector('.testimonial__author-role');
+        const testimonialImageElem = document.querySelector('.testimonial__image');
+
+        let currentIndex = 1;
+        uiUpdateTestimonial(testimonials[currentIndex]);
+
+        // Update testimonial content
+        function uiUpdateTestimonial(testimonial) {
+          const { review, name, role, img } = testimonial;
+
+          testimonialReviewElem.textContent = review;
+          testimonialAuthorNameElem.textContent = name;
+          testimonialAuthorRoleElem.textContent = role;
+          testimonialImageElem.src = './images/' + img;
+        }
+
+        // Events
+        testimonialBtnPrev.addEventListener('click', () => {
+          currentIndex--;
+
+          if (currentIndex === -1) {
+            currentIndex = testimonials.length - 1;
+          }
+
+          uiUpdateTestimonial(testimonials[currentIndex]);
+
+        })
+
+        testimonialBtnNext.addEventListener('click', () => {
+          currentIndex++;
+
+          if (currentIndex > testimonials.length - 1) {
+            currentIndex = 0;
+          }
+
+          uiUpdateTestimonial(testimonials[currentIndex]);
+
+        });
+      }();
+
+    });
+  </script>
+</body>
+
+</html>
